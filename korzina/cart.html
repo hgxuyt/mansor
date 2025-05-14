@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Корзина и оформление заказа</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #000000;
+  }
+
+  #back-btn {
+    display: block;
+    margin: 10px auto 20px auto;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  #back-btn:hover {
+    border: solid 1px black;
+    background-color: #f8f8f8;
+    color: black;
+  }
+
+  /* Стиль более красивой корзины */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    margin-bottom: 30px;
+  }
+  th {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 14px 10px;
+    border: solid 1px #000000;
+  }
+  td {
+    background-color: #fff;
+    padding: 12px 10px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    vertical-align: middle;
+  }
+  td input[type=number] {
+    width: 60px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .remove-btn {
+    padding: 6px 12px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s;
+  }
+  .remove-btn:hover {
+    border: solid 1px black;
+    background-color: #f8f8f8;
+    color: black;
+  }
+
+  /* Модальное окно формы */
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  #modal {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    position: relative;
+  }
+
+  #modal h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #000000;
+  }
+
+  #order-form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  #order-form input[type=text],
+  #order-form input[type=email],
+  #order-form input[type=tel],
+  #order-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  #order-form textarea {
+    resize: vertical;
+  }
+
+  #submit-order {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  #submit-order:hover {
+      background-color: #ffffff;
+    border: solid 1px black;
+    color: black;
+  }
+
+  /* Кнопка для открытия формы */
+  #order-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 14px 28px;
+    font-size: 18px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  #order-btn:hover {
+    background-color: #ffffff;
+    border: solid 1px black;
+    color: black;
+  }
+</style>
+</head>
+<body>
+
+<div class="verh">
+<h1>Ваша корзина</h1>
+<button id="back-btn" onclick="location.href='../index.html'">На главную</button>
+</div>
+<!-- Таблица корзины -->
+<table>
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Цена за шт.</th>
+      <th>Кол-во</th>
+      <th>Общая цена</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody id="cart-body"></tbody>
+</table>
+<div id="cart-total" style="margin-top: 20px; font-weight: bold; font-size: 1.2em;">Итоговая сумма: 0 руб.</div>
+<!-- Кнопка для оформления заказа (открывает модальное окно) -->
+<button id="order-btn">Оформить заказ</button>
+
+<!-- Модальное окно с формой -->
+<div id="overlay">
+  <div id="modal">
+    <h2>Заполните ваши данные</h2>
+    <form id="order-form" onsubmit="return submitOrder()">
+      <label for="fullName">ФИО</label>
+      <input type="text" id="fullName" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required />
+
+      <label for="phone">Номер телефона</label>
+      <input type="tel" id="phone" required />
+
+      <label for="comment">Комментарий</label>
+      <textarea id="comment" rows="4"></textarea>
+
+      <button type="submit" id="submit-order">Отправить заказ</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+  // Загрузка товаров из корзины
+  function loadCart() {
+  const tbody = document.getElementById('cart-body');
+  const totalDiv = document.getElementById('cart-total'); // блок для отображения суммы
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let totalSum = 0; // начальная сумма
+
+  if (cart.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5">Корзина пуста</td></tr>';
+    if (totalDiv) totalDiv.textContent = 'Итоговая сумма: 0 руб.';
+    return;
+  }
+
+  tbody.innerHTML = '';
+  cart.forEach((item, index) => {
+    const row = document.createElement('tr');
+
+    const nameTd = document.createElement('td');
+    nameTd.textContent = item.name;
+    row.appendChild(nameTd);
+
+    const priceTd = document.createElement('td');
+    priceTd.textContent = item.price.toLocaleString() + ' руб.';
+    row.appendChild(priceTd);
+
+    const qtyTd = document.createElement('td');
+    const qtyInput = document.createElement('input');
+    qtyInput.type = 'number';
+    qtyInput.min = '1';
+    qtyInput.value = item.quantity;
+    qtyInput.onchange = () => {
+      const newQty = parseInt(qtyInput.value);
+      if (isNaN(newQty) || newQty < 1) {
+        qtyInput.value = item.quantity;
+        return;
+      }
+      cart[index].quantity = newQty;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart(); // перезагружаем для обновления суммы
+    };
+    qtyTd.appendChild(qtyInput);
+    row.appendChild(qtyTd);
+
+    const totalPrice = item.price * item.quantity;
+    const totalTd = document.createElement('td');
+    totalTd.textContent = totalPrice.toLocaleString() + ' руб.';
+    row.appendChild(totalTd);
+
+    const actionsTd = document.createElement('td');
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Удалить';
+    removeBtn.className = 'remove-btn';
+    removeBtn.onclick = () => {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
+    };
+    actionsTd.appendChild(removeBtn);
+    row.appendChild(actionsTd);
+
+    tbody.appendChild(row);
+
+    // добавляем к итоговой сумме
+    totalSum += totalPrice;
+  });
+
+  // Обновляем итоговую сумму
+  if (totalDiv) {
+    totalDiv.textContent = 'Итоговая сумма: ' + totalSum.toLocaleString() + ' руб.';
+  }
+}
+
+  // Показать модальное окно
+  const overlay = document.getElementById('overlay');
+  const orderBtn = document.getElementById('order-btn');
+
+  orderBtn.onclick = () => {
+    // Перед открытием можно проверить, есть ли товары
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) {
+      alert('Корзина пуста!');
+      return;
+    }
+    overlay.style.display = 'flex';
+  };
+
+  // Закрытие модального окна при клике вне формы
+  overlay.onclick = (e) => {
+    if (e.target === overlay) {
+      overlay.style.display = 'none';
+    }
+  };
+
+  // Обработка отправки формы заказа
+  function submitOrder() {
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const comment = document.getElementById('comment').value.trim();
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) {
+      alert('Корзина пуста!');
+      overlay.style.display = 'none';
+      return false;
+    }
+    if (!fullName || !email || !phone) {
+      alert('Пожалуйста, заполните все обязательные поля');
+      return false;
+    }
+
+    // Здесь можно отправить данные на сервер или просто показать сообщение
+    alert(`Спасибо, ${fullName}! Ваш заказ принят.`);
+
+    // Очистить корзину
+    localStorage.removeItem('cart');
+
+    // Закрыть окно
+    overlay.style.display = 'none';
+
+    // Обновить корзину
+    loadCart();
+    return false; // чтобы форма не перезагружала страницу
+  }
+
+  // Инициализация
+  window.onload = () => {
+    loadCart();
+  };
+  
+</script>
+
+</body>
+</html>
