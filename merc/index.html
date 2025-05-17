@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>MERCEDES-BENZ - MANSOR</title>
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js"></script>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    margin: 0;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 36px;
+    color: #2c3e50;
+  }
+  .btn-cart {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 24px;
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-cart:hover {
+    background-color: #219150;
+  }
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .product {
+    position: relative;
+    left: 15%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 19%;
+    margin: 30px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .product:hover {
+    transform: scale(1.02);
+  }
+  .product img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  h3 {
+    margin: 10px 0 5px;
+    font-size: 20px;
+    color: #000000;
+  }
+  p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+  .price {
+    font-weight: bold;
+    margin: 8px 0;
+    font-size: 16px;
+    color: #000000;
+  }
+  button.add-btn {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+  }
+  button.add-btn:hover {
+    border: solid 1px black;
+    background-color: #f8f8f8;
+    color: black;
+  }
+  .mseries{
+    display: flex;
+    width: 100%;
+  }
+  .xseries{
+     display: flex;
+  }
+    .iseries{
+     display: flex;
+  }
+</style>
+</head>
+<body>
+
+      <header class="header">
+        <button class="menu-button" aria-label="Open menu">
+          <div class="hamburger-icon">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+          </div>
+          <span class="menu-text">Меню</span>
+        </button>
+      
+
+        <a class="logo" href="../index.html">Mansor</a>
+
+        <div class="search-container" id="searchContainer">
+          <button class="close-button" id="closeButton">✖</button>
+          <input type="text" class="search-input" placeholder="Введите запрос...">
+      </div>
+        <button class="search-button" id="openButton" aria-label="Search">
+         
+        </button>
+      </header>
+
+      <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">Закрыть</span><br><br><br>
+            <button class="buttoncar0" onclick="location.href='../bmw/index.html'">BMW</button><br>
+            <button class="buttoncar" onclick="location.href='../porsche/index.html'">Porsche</button><br>
+            <button class="buttoncar1" onclick="location.href='index.html'">Mercedes-Benz</button><br>
+            <button class="korz" onclick="location.href='../korzina/cart.html'">Корзина</button>
+        </div>
+    </div>
+    
+    <div class="car-section"><h2 class="section-title">Sedans</h2></div>
+
+
+
+<div class="mseries">
+  <!-- Товары 9 штук -->
+  <div class="product">
+    <img src="img/sedana.webp" alt="BMW Model 1" />
+    <h3>A-Class</h3>
+    <p>Стильный седан с отличной динамикой.</p>
+    <div class="price">5.000.000 руб.</div>
+    <button class="add-btn" onclick='addToCart("Mercedes-Benz A-Class", "Стильный с отличной динамикой.", 5000000)'>Купить</button>
+  </div>
+  <div class="product">
+    <img src="img/Cclasssedan.avif" alt="BMW Model 2" />
+    <h3>CLA-Class</h3>
+    <p>Элегантный и комфортный автомобиль.</p>
+    <div class="price">8.500.000 руб.</div>
+    <button class="add-btn" onclick='addToCart("Mercedes-Benz Cla-Class", "Элегантный и комфортный автомобиль.", 8500000)'>Купить</button>
+  </div>
+  <div class="product">
+    <img src="img/sedaneclass.avif" alt="BMW Model 3" />
+    <h3>E-Class</h3>
+    <p>Спортивный для ценителей скорости.</p>
+    <div class="price">7.500.000 руб.</div>
+    <button class="add-btn" onclick='addToCart("Mercedes-Benz E-Class", "Спортивный для ценителей скорости.", 7500000)'>Купить</button>
+  </div>
+  </div>
+
+
+  <section class="banner" aria-label="Mid-page banner"></section>
+
+
+
+
+   <div class="car-section"><h2 class="section-title">MAYBACH</h2></div>
+  <div class="xseries">
+  <div class="product">
+    <img src="img/sclass.avif" alt="BMW Model 4" />
+    <h3>S 680</h3>
+    <p>Компактный городской автомобиль.</p>
+    <div class="price">17.000.000 руб.</div>
+    <button class="add-btn" onclick='addToCart("MAYBACH S 680", "Компактный городской автомобиль.", 17000000)'>Купить</button>
+  </div>
+  <div class="product">
+    <img src="img/glsmaybach.avif" alt="BMW Model 5" />
+    <h3>GLS 600</h3>
+    <p>Люкс седан с передовыми технологиями.</p>
+    <div class="price">15.800.000 руб.</div>
+    <button class="add-btn" onclick='addToCart("MAYBACH GLS 600", "Люкс седан с передовыми технологиями.", 15800000)'>Купить</button>
+  </div>
+  <div class="product">
+    <img src="img/eqssuvmaybach.webp" alt="BMW Model 6" />
+    <h3>Eqs Suv 680</h3>
+    <p>Автомобиль для динамичных поездок.</p>
+    <div class="price">14.000.000 руб.</div>
+    <button class="add-btn" onclick='addToCart("MAYBACH EQS SUV 680", "Автомобиль для динамичных поездок.", 14000000)'>Купить</button>
+  </div>
+  </div>
+
+
+
+  <section class="banner2" aria-label="Mid-page banner"></section>
+
+
+
+
+   <div class="car-section"><h2 class="section-title">AMG</h2></div>
+  <div class="iseries">
+  <div class="product">
+    <img src="img/eqeamg.webp" alt="BMW Model 7" />
+    <h3>EQE</h3>
+    <p>Роскошный лимузин для важных мероприятий.</p>
+    <div class="price">13.000.000 руб.</div>
+    <button class="add-btn" onclick='addToCart("AMG EQE", "Роскошный для важных мероприятий.", 14000000)'>Купить</button>
+  </div>
+  <div class="product">
+    <img src="img/eqsamg.webp" alt="BMW Model 8" />
+    <h3>EQS</h3>
+    <p>Высокопроизводительный спорткар.</p>
+    <div class="price">13.000.000 руб.</div>
+    <button class="add-btn" onclick='addToCart("AMG EQS", "Высокопроизводительный спорткар.", 13000000)'>Купить</button>
+  </div>
+  <div class="product">
+    <img src="img/glbamg.webp" alt="BMW Model 9" />
+    <h3>GLB</h3>
+    <p>Эксклюзивная модель для коллекционеров.</p>
+    <div class="price">15.000.000 руб.</div>
+    <button class="add-btn" onclick='addToCart("AMG GLB", "Эксклюзивная модель для коллекционеров.", 15000000)'>Купить</button>
+  </div>
+</div>
+
+<script>
+  function addToCart(name, description, price) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({ name, description, price, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`"${name}" добавлен в корзину`);
+  }
+</script>
+</body>
+</html>
