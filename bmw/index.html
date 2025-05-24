@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>BMW — MANSOR</title>
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js"></script>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    margin: 0;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 36px;
+    color: #2c3e50;
+  }
+  .btn-cart {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 24px;
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-cart:hover {
+    background-color: #219150;
+  }
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .product {
+    position: relative;
+    left: 15%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 19%;
+    margin: 30px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .product:hover {
+    transform: scale(1.02);
+  }
+  .product img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  h3 {
+    margin: 10px 0 5px;
+    font-size: 20px;
+    color: #000000;
+  }
+  p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+  .price {
+    font-weight: bold;
+    margin: 8px 0;
+    font-size: 16px;
+    color: #000000;
+  }
+  button.add-btn {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+  }
+  button.add-btn:hover {
+    border: solid 1px black;
+    background-color: #f8f8f8;
+    color: black;
+  }
+  .mseries{
+    display: flex;
+    width: 100%;
+  }
+  .xseries{
+     display: flex;
+  }
+    .iseries{
+     display: flex;
+  }
+</style>
+</head>
+<body>
+
+      <header class="header">
+        <button class="menu-button" aria-label="Open menu">
+          <div class="hamburger-icon">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+          </div>
+          <span class="menu-text">Меню</span>
+        </button>
+      
+
+        <a class="logo" href="../index.html">Mansor</a>
+
+        <div class="search-container" id="searchContainer">
+          <button class="close-button" id="closeButton">✖</button>
+          <input type="text" class="search-input" placeholder="Введите запрос...">
+      </div>
+        <button class="search-button" id="openButton" aria-label="Search">
+         
+        </button>
+      </header>
+
+     <div id="modal" class="modal">
+        <div class="modal-content">
+          <span id="closeModal" class="close">Закрыть</span><br><br><br>
+          <button class="buttoncar0" onclick="location.href='index.html'">BMW</button><br>
+          <button class="buttoncar" onclick="location.href='../porsche/index.html'">Porsche</button><br>
+          <button class="buttoncar1" onclick="location.href='../merc/index.html'">Mercedes-Benz</button><br>
+          <button class="buttoncart" onclick="location.href='../carta/index.html'">Карта сайта</buttn><br>
+          <button class="buttonsvyaz" onclick="location.href='../svyaz/index.html'">Обратная связь</button>
+          <button class="korz" onclick="location.href='../korzina/cart.html'">Корзина</button>
+        </div>
+    </div>
+    
+    <div class="car-section"><h2 class="section-title">M SERIES</h2></div>
+
+
+
+<div class="mseries">
+  <!-- Товары 9 штук -->
+
+  <div class="product" data-name="BMW M2" data-loshad="460" data-dvigatel="3.0 л турбированный шестицилиндровый мотор" data-desc="2023" data-price="10000000" data-img="img/m2.png">
+  <img src="img/m2.png" alt="BMW M2" />
+  <h3>M2</h3>
+</div>
+
+<div id="productModal" class="modal1">
+  <div class="modal-content1"><div class="closediv">
+    <span id="closeProductModal" class="close1" style="float: right;">Закрыть</span></div>
+    <img id="modalImg" src="" style="width: 100%; max-height: 400px; object-fit: contain; position: relative; bottom: 50px;" />
+    <div class="modaltext"><h3 id="modalTitle"></h3></div>
+   <h>Год Выпуска:<p id="modalDesc"></p></h>
+   <h>Мощность:<p id="modalloshad"></p></h>
+   <h>Двигатель:<p id="modaldvigatel"></p></h>
+    <div class="price" id="modalPrice"></div>
+    <button id="modalBuyBtn" class="add-btn">Купить</button>
+  </div>
+</div>
+
+
+  <div class="product" data-name="BMW M5" data-loshad="600" data-dvigatel="4.4 л V8 с двойным турбонаддувом" data-desc="2024" data-price="13000000" data-img="img/m5.png">
+  <img src="img/m5.png" alt="BMW M5" />
+  <h3>M5</h3>
+</div>
+
+  <div class="product" data-name="BMW M8" data-loshad="600" data-dvigatel="4.4 л V8 с турбонаддувом" data-desc="2023" data-price="18000000" data-img="img/m8.png">
+  <img src="img/m8.png" alt="BMW M8" />
+  <h3>M8</h3>
+</div>
+  </div>
+
+
+  <section class="banner" aria-label="Mid-page banner"></section>
+
+
+
+
+   <div class="car-section"><h2 class="section-title">X SERIES</h2></div>
+  <div class="xseries">
+    <div class="product" data-name="BMW X7" data-loshad="530" data-dvigatel="4.4 л V8 турбированный" data-desc="2023" data-price="14000000" data-img="img/x7.png">
+  <img src="img/x7.png" alt="BMW X7" />
+  <h3>X7</h3>
+</div>
+    <div class="product" data-name="BMW X6M" data-loshad="600" data-dvigatel="4.4 л V8 с турбонаддувом" data-desc="2023" data-price="17000000" data-img="img/x6m.png">
+  <img src="img/x6m.png" alt="BMW X6M" />
+  <h3>X6M</h3>
+</div>
+    <div class="product" data-name="BMW X5M" data-loshad="600" data-dvigatel="4.4 л V8 с турбонаддувом" data-desc="2023" data-price="15000000" data-img="img/x5m.png">
+  <img src="img/x5m.png" alt="BMW X5M" />
+  <h3>X5M</h3>
+</div>
+  </div>
+
+
+
+  <section class="banner2" aria-label="Mid-page banner2"></section>
+
+
+
+
+   <div class="car-section"><h2 class="section-title">I SERIES</h2></div>
+  <div class="iseries">
+      <div class="product" data-name="BMW I7" data-loshad="590" data-dvigatel="Электродвигатель" data-desc="2023" data-price="15000000" data-img="img/i7.png">
+  <img src="img/i7.png" alt="BMW I7" />
+  <h3>I7</h3>
+</div>
+        <div class="product" data-name="BMW IX M70" data-loshad="610" data-dvigatel="Электродвигатель" data-desc="2023" data-price="10000000" data-img="img/ixm70.png">
+  <img src="img/ixm70.png" alt="BMW IX M70" />
+  <h3>IX M70</h3>
+</div>
+         <div class="product" data-name="BMW I5 M60" data-loshad="600" data-dvigatel="Электродвигатель" data-desc="2025" data-price="12000000" data-img="img/i5m60.png">
+  <img src="img/i5m60.png" alt="BMW I5 M60" />
+  <h3>I5 M60</h3>
+</div>
+</div>
+<div class="podval">
+  <p style="margin-top: 40px;">&copy; 2025 MANSOR. Все права защищены.</p>
+  <div style="margin-top:40px;">
+    <strong>Рабочие часы:</strong> <span id="working-hours"></span>
+  </div>
+<script>
+   // Определение текущего дня недели
+   const today = new Date();
+  const day = today.getDay(); // 0 - Воскресенье, 1 - Понедельник, ..., 6 - Суббота
+
+  const hoursMap = {
+    1: "Пн: 09:00 - 18:00",
+    2: "Вт: 09:00 - 18:00",
+    3: "Ср: 09:00 - 18:00",
+    4: "Чт: 09:00 - 18:00",
+    5: "Пт: 09:00 - 18:00",
+    6: "Сб: 10:00 - 14:00",
+    0: "Воскресенье: выходной"
+  };
+
+  document.getElementById('working-hours').textContent = hoursMap[day];
+  function addToCart(name, description, price) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({ name, description, price, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`"${name}" добавлен в корзину`);
+  }
+</script>
+</body>
+</html>

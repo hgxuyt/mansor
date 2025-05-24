@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>PORSCHE - MANSOR</title>
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js"></script>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    margin: 0;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 36px;
+    color: #2c3e50;
+  }
+  .btn-cart {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 24px;
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-cart:hover {
+    background-color: #219150;
+  }
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .product {
+    position: relative;
+    left: 15%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 19%;
+    margin: 30px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .product:hover {
+    transform: scale(1.02);
+  }
+  .product img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  h3 {
+    margin: 10px 0 5px;
+    font-size: 20px;
+    color: #000000;
+  }
+  p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+  .price {
+    font-weight: bold;
+    margin: 8px 0;
+    font-size: 16px;
+    color: #000000;
+  }
+  button.add-btn {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+  }
+  button.add-btn:hover {
+    border: solid 1px black;
+    background-color: #f8f8f8;
+    color: black;
+  }
+  .mseries{
+    display: flex;
+    width: 100%;
+  }
+  .xseries{
+     display: flex;
+  }
+    .iseries{
+     display: flex;
+  }
+</style>
+</head>
+<body>
+
+      <header class="header">
+        <button class="menu-button" aria-label="Open menu">
+          <div class="hamburger-icon">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+          </div>
+          <span class="menu-text">Меню</span>
+        </button>
+      
+
+        <a class="logo" href="../index.html">Mansor</a>
+
+        <div class="search-container" id="searchContainer">
+          <button class="close-button" id="closeButton">✖</button>
+          <input type="text" class="search-input" placeholder="Введите запрос...">
+      </div>
+        <button class="search-button" id="openButton" aria-label="Search">
+         
+        </button>
+      </header>
+
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span id="closeModal" class="close">Закрыть</span><br><br><br>
+          <button class="buttoncar0" onclick="location.href='../bmw/index.html'">BMW</button><br>
+          <button class="buttoncar" onclick="location.href='../porsche/index.html'">Porsche</button><br>
+          <button class="buttoncar1" onclick="location.href='index.html'">Mercedes-Benz</button><br>
+          <button class="buttoncart" onclick="location.href='../carta/index.html'">Карта сайта</buttn><br>
+          <button class="buttonsvyaz" onclick="location.href='../svyaz/index.html'">Обратная связь</button>
+          <button class="korz" onclick="location.href='../korzina/cart.html'">Корзина</button>
+        </div>
+    </div>
+    
+
+
+
+
+    <div class="car-section"><h2 class="section-title">911</h2></div>
+
+
+
+<div class="mseries">
+
+     <div class="product" data-name="Porsche 911 Carrera" data-loshad="420" data-dvigatel="3.0 л турбированный боксер-двигатель" data-desc="2023" data-price="16000000" data-img="img/911carrera.webp">
+  <img src="img/911carrera.webp" alt="Porsche 911 Carrera" />
+  <h3>Carrera</h3>
+</div>
+
+<div id="productModal" class="modal1">
+  <div class="modal-content1"><div class="closediv">
+    <span id="closeProductModal" class="close1" style="float: right;">Закрыть</span></div>
+    <img id="modalImg" src="" style="width: 100%; max-height: 400px; object-fit: contain; position: relative; bottom: 50px;" />
+    <div class="modaltext"><h3 id="modalTitle"></h3></div>
+   <h>Год Выпуска:<p id="modalDesc"></p></h>
+   <h>Лошадиных Сил:<p id="modalloshad"></p></h>
+   <h>Двигатель:<p id="modaldvigatel"></p></h>
+    <div class="price" id="modalPrice"></div>
+    <button id="modalBuyBtn" class="add-btn">Купить</button>
+  </div>
+</div>
+
+ <div class="product" data-name="Porsche 911 Turbo S" data-loshad="640" data-dvigatel="3.7 л турбо-боксер" data-desc="2023" data-price="24000000" data-img="img/911turbos.webp">
+  <img src="img/911turbos.webp" alt="Porsche 911 Turbo S" />
+  <h3>Turbo S</h3>
+</div>
+
+ <div class="product" data-name="Porsche 911 GT3" data-loshad="502" data-dvigatel="4.0 л атмосферный боксер" data-desc="2023" data-price="18800000" data-img="img/911gt3.webp">
+  <img src="img/911gt3.webp" alt="Porsche 911 GT3" />
+  <h3>GT3</h3>
+</div>
+
+
+  </div>
+   
+
+
+  <section class="banner" aria-label="Mid-page banner"></section>
+
+
+
+
+   <div class="car-section"><h2 class="section-title">Panamera</h2></div>
+  <div class="xseries">
+
+ <div class="product" data-name="Porsche Panamera ST II" data-loshad="620" data-dvigatel="4.0 л турбо V8" data-desc="2023" data-price="15000000" data-img="img/panamerasportturismoii.webp">
+  <img src="img/panamerasportturismoii.webp" alt="Porsche Panamera ST II" />
+  <h3>ST II</h3>
+</div>
+
+ <div class="product" data-name="Porsche Panamera Turbo III" data-loshad="600" data-dvigatel="4.0 л турбо V8" data-desc="2023" data-price="28000000" data-img="img/panameraturbo3.webp">
+  <img src="img/panameraturbo3.webp" alt="Porsche Panamera Turbo III" />
+  <h3>Turbo III</h3>
+</div>
+
+ <div class="product" data-name="Porsche Panamera III" data-loshad="330" data-dvigatel="3.0 л турбированный V6" data-desc="2023" data-price="18000000" data-img="img/panameraiii.webp">
+  <img src="img/panameraiii.webp" alt="Porsche Panamera III" />
+  <h3>III</h3>
+</div>
+
+
+</div>
+
+
+  <section class="banner2" aria-label="Mid-page banner"></section>
+
+
+
+
+   <div class="car-section"><h2 class="section-title">CAYENNE</h2></div>
+  <div class="iseries">
+
+
+<div class="product" data-name="Porsche Cayenne Coupe III" data-loshad="440" data-dvigatel="3.0 л V6 турбо" data-desc="2025" data-price="12000000" data-img="img/cayennecoupe3.webp">
+  <img src="img/cayennecoupe3.webp" alt="Porsche Coupe III" />
+  <h3>Coupe III</h3>
+</div>
+
+<div class="product" data-name="Porsche Cayenne Turbo III" data-loshad="540" data-dvigatel="4.0 л V8 турбо" data-desc="2023" data-price="16000000" data-img="img/cayenneturboiii.webp">
+  <img src="img/cayenneturboiii.webp" alt="Porsche Cayenne Turbo III" />
+  <h3>Turbo III</h3>
+</div>
+
+<div class="product" data-name="Porsche Cayenne GTS III" data-loshad="460" data-dvigatel="4.0 л V8" data-desc="2023" data-price="14000000" data-img="img/cayennegts3.webp">
+  <img src="img/cayennegts3.webp" alt="Porsche Cayenne GTS III" />
+  <h3>GTS III</h3>
+</div>
+
+</div>
+
+
+
+<div class="podval">
+  <p style="margin-top: 40px;">&copy; 2025 MANSOR. Все права защищены.</p>
+  <div style="margin-top:40px;">
+    <strong>Рабочие часы:</strong> <span id="working-hours"></span>
+  </div>
+  </div>
+<script>
+   // Определение текущего дня недели
+   const today = new Date();
+  const day = today.getDay(); // 0 - Воскресенье, 1 - Понедельник, ..., 6 - Суббота
+
+  const hoursMap = {
+    1: "Пн: 09:00 - 18:00",
+    2: "Вт: 09:00 - 18:00",
+    3: "Ср: 09:00 - 18:00",
+    4: "Чт: 09:00 - 18:00",
+    5: "Пт: 09:00 - 18:00",
+    6: "Сб: 10:00 - 14:00",
+    0: "Воскресенье: выходной"
+  };
+
+  document.getElementById('working-hours').textContent = hoursMap[day];
+  function addToCart(name, description, price) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({ name, description, price, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`"${name}" добавлен в корзину`);
+  }
+</script>
+</body>
+</html>

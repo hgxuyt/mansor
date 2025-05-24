@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<title>Корзина - MANSOR</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  #menuModal {
+  z-index: 1000; /* Выше, чем overlay */
+}
+
+  .modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Остается на одном месте */
+    z-index: 1; /* На переднем плане */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Включает прокрутку если необходимо */
+    background-color: rgb(0,0,0); /* Фон с полупрозрачным черным */
+    background-color: rgba(0,0,0,0.7); /* Черный с 70% непрозрачностью */
+  }
+  .modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    width: 30%; /* Можете задать любую ширину */
+    height: 100%;
+    display: flex; /* Превращаем див в Flex-контейнер */
+    flex-direction: column; /* Располагаем элементы по вертикали */
+    gap: 0;
+  }
+  .close {
+    color: #000000;
+    float: left;
+    font-size: 23px;
+    font-weight: bold;
+  }
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.korz{
+    margin-top: auto; /* Этот отступ "выталкивает" ссылку вниз */
+  }
+  .rabotatop{
+    color: white;
+  }
+  .buttoncar{
+    margin-top: -40px; /* Отступ сверху */
+    margin-bottom: 20px; /* Отступ снизу */
+    /* Другие стили для элементов */
+  }
+  .buttoncar1{
+    margin-top: -40px; /* Отступ сверху */
+    margin-bottom: 20px; /* Отступ снизу */
+    /* Другие стили для элементов */
+  }
+  .buttoncar0{
+    margin-top: -20px; /* Отступ сверху */
+    margin-bottom: 20px; /* Отступ снизу */
+    /* Другие стили для элементов */
+  }
+   body {
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 10px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #000000;
+  }
+
+  #back-btn {
+    display: block;
+    margin: 10px auto 20px auto;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  #back-btn:hover {
+    border: solid 1px black;
+    background-color: #f8f8f8;
+    color: black;
+  }
+
+  /* Стиль более красивой корзины */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    margin-bottom: 30px;
+  }
+  th {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 14px 10px;
+    border: solid 1px #000000;
+  }
+  td {
+    background-color: #fff;
+    padding: 12px 10px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    vertical-align: middle;
+  }
+  td input[type=number] {
+    width: 60px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .remove-btn {
+    padding: 6px 12px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s;
+  }
+  .remove-btn:hover {
+    border: solid 1px black;
+    background-color: #f8f8f8;
+    color: black;
+  }
+
+  /* Модальное окно формы */
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  #modal {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    position: relative;
+  }
+
+  #modal h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #000000;
+  }
+
+  #orderform label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  #orderform input[type=text],
+  #orderform input[type=ID],
+  #orderform input[type=tel],
+  #orderform textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  #orderform textarea {
+    resize: vertical;
+  }
+
+  #submit-order {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  #submit-order:hover {
+      background-color: #ffffff;
+    border: solid 1px black;
+    color: black;
+  }
+
+  /* Кнопка для открытия формы */
+  #order-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 14px 28px;
+    font-size: 18px;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  #order-btn:hover {
+    background-color: #ffffff;
+    border: solid 1px black;
+    color: black;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+      <header class="header">
+        <button class="menu-button" aria-label="Open menu">
+          <div class="hamburger-icon">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+          </div>
+          <span class="menu-text">Меню</span>
+        </button>
+      
+<div class="ppooll">
+        <a class="logo" href="../index.html">Mansor</a>
+</div>
+      </header>
+
+<div class="verh">
+<h1>Ваша корзина</h1>
+
+</div>
+      <div id="menumodal" class="modal">
+        <div class="modal-content">
+          <span id="closeModal" class="close">Закрыть</span><br><br><br>
+          <button class="buttoncar0" onclick="location.href='../bmw/index.html'">BMW</button><br>
+          <button class="buttoncar" onclick="location.href='../porsche/index.html'">Porsche</button><br>
+          <button class="buttoncar1" onclick="location.href='../merc/index.html'">Mercedes-Benz</button><br>
+          <button class="buttoncart" onclick="location.href='../carta/index.html'">Карта сайта</buttn><br>
+          <button class="buttonsvyaz" onclick="location.href='../svyaz/index.html'">Обратная связь</button>
+          <button class="korz" onclick="location.href='cart.html'">Корзина</button>
+
+        </div>
+    </div>
+
+
+<!-- Таблица корзины -->
+<table>
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Цена за шт.</th>
+      <th>Кол-во</th>
+      <th>Общая цена</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody id="cart-body"></tbody>
+</table>
+<div id="cart-total" style="margin-top: 20px; font-weight: bold; font-size: 1.2em;">Итоговая сумма: 0 руб.</div>
+<button id="order-btn">Оформить заказ</button>
+
+<!-- Модальное окно с формой -->
+<div id="overlay">
+  <div id="modal">
+    <h2>Заполните ваши данные</h2>
+    <form id="orderform" onsubmit="return submitOrder()">
+      <label for="fullName">Имя</label>
+      <input type="text" id="fullName" required />
+
+      <label for="ID">Телеграмм ID</label>
+      <input type="text" id="ID" required />
+
+      <label for="phone">Номер телефона</label>
+      <input type="tel" id="phone" required />
+
+      <label for="comment">Комментарий</label>
+      <textarea id="comment" rows="4"></textarea>
+
+      <button type="submit" id="submit-order">Оформить заказ</button>
+    </form>
+  </div>
+</div>
+<div class="podval">
+  <p style="margin-top: 40px;">&copy; 2025 MANSOR. Все права защищены.</p>
+  <div style="margin-top:40px;">
+    <strong class="rabotatop">Рабочие часы:</strong> <span id="working-hours"></span>
+  </div>
+
+<script src="script.js"></script>
+<script>
+   // Определение текущего дня недели
+   const today = new Date();
+  const day = today.getDay(); // 0 - Воскресенье, 1 - Понедельник, ..., 6 - Суббота
+
+  const hoursMap = {
+    1: "Пн: 09:00 - 18:00",
+    2: "Вт: 09:00 - 18:00",
+    3: "Ср: 09:00 - 18:00",
+    4: "Чт: 09:00 - 18:00",
+    5: "Пт: 09:00 - 18:00",
+    6: "Сб: 10:00 - 14:00",
+    0: "Воскресенье: выходной"
+  };
+
+  document.getElementById('working-hours').textContent = hoursMap[day];
+function loadCart() {
+  const tbody = document.getElementById('cart-body');
+  const totalDiv = document.getElementById('cart-total');
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let totalSum = 0;
+
+  if (cart.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5">Корзина пуста</td></tr>';
+    totalDiv.textContent = 'Итоговая сумма: 0 руб.';
+    return;
+  }
+
+  tbody.innerHTML = '';
+  cart.forEach((item, index) => {
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>${item.price.toLocaleString()} руб.</td>
+      <td><input type="number" min="1" value="${item.quantity}" onchange="updateQuantity(${index}, this.value)" /></td>
+      <td>${(item.price * item.quantity).toLocaleString()} руб.</td>
+      <td><button class="remove-btn" onclick="removeItem(${index})">Удалить</button></td>
+    `;
+
+    tbody.appendChild(row);
+    totalSum += item.price * item.quantity;
+  });
+
+  totalDiv.textContent = 'Итоговая сумма: ' + totalSum.toLocaleString() + ' руб.';
+}
+
+function updateQuantity(index, value) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const qty = parseInt(value);
+  if (isNaN(qty) || qty < 1) return;
+  cart[index].quantity = qty;
+  localStorage.setItem('cart', JSON.stringify(cart));
+  loadCart();
+}
+
+function removeItem(index) {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.splice(index, 1);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  loadCart();
+}
+
+document.getElementById('order-btn').onclick = () => {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  if (cart.length === 0) {
+    alert('Корзина пуста!');
+    return;
+  }
+  document.getElementById('overlay').style.display = 'flex';
+};
+
+document.getElementById('overlay').onclick = (e) => {
+  if (e.target === document.getElementById('overlay')) {
+    document.getElementById('overlay').style.display = 'none';
+  }
+};
+
+function submitOrder() {
+  const fullName = document.getElementById('fullName').value.trim();
+  const ID = document.getElementById('ID').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const comment = document.getElementById('comment').value.trim();
+
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  if (cart.length === 0) {
+    alert('Корзина пуста!');
+    document.getElementById('overlay').style.display = 'none';
+    return false;
+  }
+  if (!fullName || !ID || !phone) {
+    alert('Пожалуйста, заполните все обязательные поля');
+    return false;
+  }
+
+  let message = `<b>📦 Новый заказ!</b>\n\n`;
+  message += `<b>👤 Имя:</b> ${fullName}\n`;
+  message += `<b>📱 Телефон:</b> ${phone}\n`;
+  message += `<b>💻 Телеграмм:</b> @${ID}\n`;
+  message += `<b>💬 Комментарий:</b> ${comment || '—'}\n\n`;
+  message += `<b>🛒 Товары:</b>\n`;
+
+  let totalSum = 0;
+  cart.forEach(item => {
+    message += `• ${item.name} — ${item.quantity} шт. x ${item.price} руб.\n`;
+    totalSum += item.quantity * item.price;
+  });
+
+  message += `\n<b>💰 Итоговая сумма:</b> ${totalSum.toLocaleString()} руб.`;
+
+  const BOT_TOKEN = '7687713713:AAEvClfEgs3-PGXe_J9BAoM0Z2nyAg3_vBE';
+  const CHAT_ID = '552793585';
+  const URL_API = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+  fetch(URL_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message,
+      parse_mode: 'HTML'
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.ok) {
+      alert(`Спасибо, ${fullName}! Ваш заказ принят.`);
+      localStorage.removeItem('cart');
+      document.getElementById('overlay').style.display = 'none';
+      loadCart();
+    } else {
+      alert('Ошибка при отправке заказа в Telegram.');
+    }
+  })
+  .catch(err => {
+    console.error('Telegram API error:', err);
+    alert('Ошибка соединения с Telegram API.');
+  });
+
+  return false;
+}
+
+window.onload = () => {
+  loadCart();
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Обратная связь</title>
+  <style>
+    /* Стили для header и modal */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.25rem;
+      background-color: white;
+      height: 73px;
+      width: 100%;
+    }
+
+    .menu-button {
+      display: flex;
+      gap: 0.375rem;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hamburger-icon {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .hamburger-line {
+      height: 3px;
+      background-color: black;
+      width: 43px;
+    }
+
+    .menu-text {
+      font-size: 1.875rem;
+      color: black;
+    }
+
+    .logo {
+      font-size: 3.75rem;
+      color: black;
+      position: relative;
+      top: 4px;
+      right: 45%;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      padding: 20px;
+      width: 30%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .close {
+      color: #000;
+      float: left;
+      font-size: 23px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .buttoncar0, .buttoncar, .buttoncar1, .buttoncart, .buttonsvyaz, .korz {
+      font-size: 30px;
+      text-align: left;
+      border: none;
+      background-color: white;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .buttoncar0 { margin-top: -30px; }
+    .buttoncar { margin-top: -30px; }
+    .buttoncar1 { margin-top: -30px; }
+    .buttoncart { margin-top: -30px; }
+    .buttonsvyaz { margin-top: -30px; }
+    .korz { margin-top: auto; }
+
+    /* Форма обратной связи */
+    .contact-form {
+      border: 2px solid #000;
+      padding: 40px;
+      border-radius: 12px;
+      width: 400px;
+      box-shadow: 8px 8px 0 #000;
+      margin-top: 40px;
+    }
+
+    .contact-form h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      border: 2px solid #000;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    .podval{
+  display: flex;
+  background-color: black;
+  width: 100%;
+  height: 90px;
+  color: #7f8c8d;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: auto;
+}
+    .contact-form button {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #000;
+      background-color: #000;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .contact-form button:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .success {
+      text-align: center;
+      margin-top: 10px;
+      color: green;
+    }
+
+    @media (max-width: 640px) {
+      .logo { font-size: 3rem; right: 0; }
+      .modal-content { width: 80%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <button class="menu-button" aria-label="Open menu">
+      <div class="hamburger-icon">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+      </div>
+      <span class="menu-text">Меню</span>
+    </button>
+    <a class="logo" href="../index.html">Mansor</a>
+  </header>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">Закрыть</span><br><br><br>
+      <button class="buttoncar0" onclick="location.href='../bmw/index.html'">BMW</button><br>
+      <button class="buttoncar" onclick="location.href='../porsche/index.html'">Porsche</button><br>
+      <button class="buttoncar1" onclick="location.href='../merc/index.html'">Mercedes-Benz</button><br>
+      <button class="buttoncart" onclick="location.href='../carta/index.html'">Карта сайта</button><br>
+      <button class="buttonsvyaz" onclick="location.href='index.html'">Обратная связь</button>
+      <button class="korz" onclick="location.href='../korzina/cart.html'">Корзина</button>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="contact-form">
+    <h1>Обратная связь</h1>
+    <form id="tgForm">
+      <input type="text" name="name" placeholder="Имя" required>
+      <input type="email" name="email" placeholder="Эл. почта" required>
+      <textarea name="message" placeholder="Сообщение" required></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+    <div class="success" id="successMessage" style="display: none;">Сообщение отправлено!</div>
+  </div>
+
+
+  <div class="podval">
+    <p style="margin-top: 40px;">&copy; 2025 MANSOR. Все права защищены.</p>
+    <div style="margin-top:40px;">
+      <strong style="color: white;">Рабочие часы:</strong> <span style="color: white;" id="working-hours"></span>
+    </div>
+  <!-- Скрипты -->
+  <script>
+     // Определение текущего дня недели
+     const today = new Date();
+  const day = today.getDay(); // 0 - Воскресенье, 1 - Понедельник, ..., 6 - Суббота
+
+  const hoursMap = {
+    1: "Пн: 09:00 - 18:00",
+    2: "Вт: 09:00 - 18:00",
+    3: "Ср: 09:00 - 18:00",
+    4: "Чт: 09:00 - 18:00",
+    5: "Пт: 09:00 - 18:00",
+    6: "Сб: 10:00 - 14:00",
+    0: "Воскресенье: выходной"
+  };
+
+  document.getElementById('working-hours').textContent = hoursMap[day];
+    // Модальное меню
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuButton = document.querySelector('.menu-button');
+      const modal = document.getElementById('modal');
+      const closeModal = document.getElementById('closeModal');
+
+      menuButton.addEventListener('click', function () {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeModal.addEventListener('click', function () {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      });
+
+      window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+
+    // Telegram отправка
+    const BOT_TOKEN = '7687713713:AAEvClfEgs3-PGXe_J9BAoM0Z2nyAg3_vBE';
+    const CHAT_ID = '552793585';
+
+    document.getElementById('tgForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = this.name.value.trim();
+      const email = this.email.value.trim();
+      const message = this.message.value.trim();
+
+      const text = `📩 Новое сообщение с сайта:\n👤 Имя: ${name}\n📧 Email: ${email}\n📝 Сообщение: ${message}`;
+
+      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: CHAT_ID, text: text })
+      }).then(response => {
+        if (response.ok) {
+          document.getElementById('successMessage').style.display = 'block';
+          document.getElementById('tgForm').reset();
+        } else {
+          alert('Ошибка при отправке сообщения.');
+        }
+      }).catch(err => {
+        alert('Ошибка подключения к Telegram API.');
+        console.error(err);
+      });
+    });
+  </script>
+</body>
+</html>

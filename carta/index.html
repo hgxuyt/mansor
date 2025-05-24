@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Карта магазина</title>
+  <style>
+    /* ===== Стили HEADER + MODAL + АДАПТИВ ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #fff;
+      color: #000;
+      font-family: 'Helvetica Neue', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 73px; /* отступ под хедер */
+    }
+    a {
+      color: black;
+      text-decoration: none;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.25rem;
+      background-color: white;
+      height: 73px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+    .menu-button {
+      display: flex;
+      gap: 0.375rem;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .hamburger-icon {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .hamburger-line {
+      height: 3px;
+      background-color: black;
+      width: 43px;
+    }
+    .menu-text {
+      font-size: 1.875rem;
+      color: black;
+    }
+    .logo {
+      font-size: 3.75rem;
+      color: black;
+      font-weight: bold;
+      text-decoration: none;
+      margin-right: 8%;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      padding: 20px;
+      width: 300px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .close {
+      color: #000;
+      font-size: 23px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+    .buttoncar0, .buttoncar, .buttoncar1, .buttoncart, .buttonsvyaz {
+      font-size: 30px;
+      text-align: left;
+      border: none;
+      background-color: white;
+      cursor: pointer;
+      margin-bottom: 2px;
+    }
+.korz{
+    font-size: 30px;
+      text-align: left;
+      border: none;
+      background-color: white;
+      cursor: pointer;
+  margin-top: auto;
+}
+    /* ===== Контент ===== */
+    h1 {
+      font-size: 36px;
+      margin: 40px 0 20px;
+      border-bottom: 2px solid #000;
+      padding-bottom: 10px;
+    }
+
+    .sitemap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 800px;
+    }
+.podval{
+  display: flex;
+  background-color: black;
+  width: 100%;
+  height: 90px;
+  color: #7f8c8d;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  top: 90%;
+}
+.ppooll{
+  width: 100%;
+text-align: center;
+}
+    .sitemap a {
+      text-decoration: none;
+      color: #000;
+      border: 1px solid #000;
+      padding: 15px;
+      text-align: center;
+      font-size: 18px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .sitemap a:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    @media (max-width: 640px) {
+      .logo { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <button class="menu-button" aria-label="Open menu">
+      <div class="hamburger-icon">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+      </div>
+      <span class="menu-text">Меню</span>
+    </button>
+    <div class="ppooll">
+    <a class="logo" href="../index.html">Mansor</a>
+
+    </div>
+  </header>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">Закрыть</span>
+      <button class="buttoncar0" onclick="location.href='../bmw/index.html'">BMW</button>
+      <button class="buttoncar" onclick="location.href='../porsche/index.html'">Porsche</button>
+      <button class="buttoncar1" onclick="location.href='../merc/index.html'">Mercedes-Benz</button>
+      <button class="buttoncart" onclick="location.href='index.html'">Карта сайта</button>
+      <button class="buttonsvyaz" onclick="location.href='../svyaz/index.html'">Обратная связь</button>
+      <button class="korz" onclick="location.href='../korzina/cart.html'">Корзина</button>
+    </div>
+  </div>
+
+  <!-- Основной контент -->
+  <h1>Карта магазина</h1>
+  <div class="sitemap">
+    <a href="../index.html">Главная</a>
+    <a href="../bmw/index.html">BMW</a>
+    <a href="../merc/index.html">Mercedes</a>
+    <a href="../porsche/index.html">Porsche</a>
+    <a href="../korzina/cart.html">Корзина</a>
+    <a href="../svyaz/index.html">Обратная связь</a>
+    <a href="index.html">Карта сайта</a>
+  </div>
+
+  <div class="podval">
+    <p style="margin-top: 40px;">&copy; 2025 MANSOR. Все права защищены.</p>
+    <div style="margin-top:40px;">
+      <strong style="color: white;">Рабочие часы:</strong> <span style="color: white;" id="working-hours"></span>
+    </div>
+  </div>
+  <!-- JS -->
+  <script>
+     // Определение текущего дня недели
+     const today = new Date();
+  const day = today.getDay(); // 0 - Воскресенье, 1 - Понедельник, ..., 6 - Суббота
+
+  const hoursMap = {
+    1: "Пн: 09:00 - 18:00",
+    2: "Вт: 09:00 - 18:00",
+    3: "Ср: 09:00 - 18:00",
+    4: "Чт: 09:00 - 18:00",
+    5: "Пт: 09:00 - 18:00",
+    6: "Сб: 10:00 - 14:00",
+    0: "Воскресенье: выходной"
+  };
+
+  document.getElementById('working-hours').textContent = hoursMap[day];
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuButton = document.querySelector('.menu-button');
+      const modal = document.getElementById('modal');
+      const closeModal = document.getElementById('closeModal');
+
+      menuButton.addEventListener('click', function () {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeModal.addEventListener('click', function () {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      });
+
+      window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
